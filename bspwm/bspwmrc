@@ -1,0 +1,43 @@
+#! /bin/sh
+
+# start sxhkd
+sxhkd &
+
+# set up monitors
+bspc monitor DP-0 -d VI:6 VII:7 VIII:8 IX:9 X:10
+bspc monitor DP-5 -d I:1 II:2 III:3 IV:4 V:5 
+
+bspc config border_width         2
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+# autostart application rules
+bspc rule -a "Termite" desktop='^1'
+bspc rule -a "Chromium-browser" desktop='^6' follow=on focus=on
+bspc rule -a "discord" desktop='^7' follow=off
+bspc rule -a "Slack" desktop='^7' follow=off
+
+# autostart applications
+termite -e neofetch --hold &
+sleep 1
+termite -e 'bash -c "~/mine"' --hold &
+sleep 1
+termite -e gtop --hold &
+sleep 1
+discord &
+sleep 1
+slack &
+sleep 1
+chromium-browser &
+
+# start polybar
+killall -q polybar
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+polybar -r left &
+polybar -r right &
+echo "Polybar launched..."
+
+bspc desktop -f '^6'

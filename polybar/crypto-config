@@ -1,0 +1,6 @@
+[general]
+base_currency = USD
+display = both
+
+[ethereum]
+icon = ETH:

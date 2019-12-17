@@ -1,0 +1,144 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+background = #222 
+background-alt = #444
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[bar/left]
+bottom=false
+monitor=DP-5
+
+font-0 = fixed:pixlesize=10;1
+height = 27
+width = 100%
+radius = 6.0
+fixed-center = false
+
+border-size = 4
+border-color = #000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+modules-left = bspwm
+modules-center = date
+modules-right = cpu gpu memory temperature
+
+wm-restack = bspwm
+
+
+[bar/right]
+bottom=false
+monitor=DP-0
+
+font-0 = fixed:pixlesize=10;1
+height = 27
+width = 100%
+radius = 6.0
+fixed-center = false
+
+border-size = 4
+border-color = #000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+modules-left = bspwm
+modules-center = date
+modules-right = crypto
+
+wm-restack = bspwm
+
+
+
+
+
+
+[module/bspwm]
+ws-icon-1 = I;one
+ws-icon-2 = II;two
+ws-icon-3 = III;three
+ws-icon-4 = IV;four
+ws-icon-5 = V;five
+ws-icon-6 = VI;six
+ws-icon-7 = VII;seven
+ws-icon-8 = VIII;eight
+ws-icon-9 = IX;nine
+ws-icon-0 = X;ten
+
+type = internal/bspwm
+pin-workspaces = true
+
+label-focused = %icon%
+label-focused-background = ${colors.background-alt}
+label-focused-underline = ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %icon%
+label-occupied-padding = 2
+
+label-empty = %icon%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+label-separator = |
+label-separator-padding = 2
+label-separator-foreground = ${colors.primary}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+label = CPU %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 0.5
+label = Mem %percentage_used%%
+
+[module/date]
+type = internal/date
+interval = 5
+date = %Y-%m-%d
+time = %H:%M
+label = %date% %time%
+
+[module/temperature]
+type = internal/temperature
+label = %temperature-c%
+
+[module/gpu]
+type = custom/script
+exec = ~/.config/polybar/system-nvidia-smi.sh
+interval = 0.5
+
+[module/crypto]
+type = custom/script
+exec = ~/.config/polybar/crypto.py
+interval = 10
