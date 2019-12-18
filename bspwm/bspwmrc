@@ -14,11 +14,20 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
+# start polybar
+killall -q polybar
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+polybar -r left &
+polybar -r right &
+polybar -r bottom &
+echo "Polybar launched..."
+
 # autostart application rules
-bspc rule -a "Termite" desktop='^1'
+bspc rule -a "Termite" desktop='^1' follow=on focus=on
 bspc rule -a "Chromium-browser" desktop='^6' follow=on focus=on
 bspc rule -a "discord" desktop='^7' follow=off
 bspc rule -a "Slack" desktop='^7' follow=off
+bspc rule -a "Steam" desktop='^8' follow=off focus=off
 
 # autostart applications
 termite -e neofetch --hold &
@@ -28,16 +37,19 @@ sleep 1
 termite -e gtop --hold &
 sleep 1
 discord &
-sleep 1
+sleep 2
 slack &
-sleep 1
+sleep 2
 chromium-browser &
+sleep 2
+steam &
+sleep 5
 
-# start polybar
-killall -q polybar
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-polybar -r left &
-polybar -r right &
-echo "Polybar launched..."
+# remove rules because --one-shot doesn't work
+bspc rule -r "Termite" 
+bspc rule -r "Chromium-browser"
+bspc rule -r "discord"
+bspc rule -r "Slack"
+bspc rule -r "Steam" 
 
 bspc desktop -f '^6'

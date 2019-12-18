@@ -176,7 +176,7 @@ format-underline = #198844
 [module/crypto]
 type = custom/script
 exec = ~/.config/polybar/crypto.py
-interval = 30
+interval = 120
 format-underline = #fba922
 
 [module/stocks]
