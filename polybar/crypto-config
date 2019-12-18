@@ -2,5 +2,13 @@
 base_currency = USD
 display = both
 
+[bitcoin]
+icon = BTC: 
+
 [ethereum]
 icon = ETH:
+
+[litecoin]
+icon = LTC: 
+
+

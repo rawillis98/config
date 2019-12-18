@@ -30,6 +30,7 @@ bottom=false
 monitor=DP-5
 
 font-0 = fixed:pixlesize=10;1
+line-size = 3
 height = 27
 width = 100%
 radius = 6.0
@@ -56,6 +57,7 @@ bottom=false
 monitor=DP-0
 
 font-0 = fixed:pixlesize=10;1
+line-size = 3
 height = 27
 width = 100%
 radius = 6.0
@@ -71,7 +73,33 @@ module-margin-left = 1
 module-margin-right = 2
 
 modules-left = bspwm
-modules-center = date
+modules-center = title
+modules-right = 
+
+wm-restack = bspwm
+
+[bar/bottom]
+bottom=true
+monitor=DP-0
+
+font-0 = fixed:pixlesize=10;1
+line-size = 3
+height = 27
+width = 100%
+radius = 6.0
+fixed-center = false
+
+border-size = 4
+border-color = #000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+modules-left = stocks
+modules-center = ethermine
 modules-right = crypto
 
 wm-restack = bspwm
@@ -116,11 +144,14 @@ label-separator-foreground = ${colors.primary}
 type = internal/cpu
 interval = 2
 label = CPU %percentage%%
+format-underline = #cc342b
 
 [module/memory]
 type = internal/memory
 interval = 0.5
 label = Mem %percentage_used%%
+format-underline = #3971ed
+
 
 [module/date]
 type = internal/date
@@ -128,17 +159,36 @@ interval = 5
 date = %Y-%m-%d
 time = %H:%M
 label = %date% %time%
+format-underline = #a36ac7
+
 
 [module/temperature]
 type = internal/temperature
 label = %temperature-c%
+format-underline = #ff0000
 
 [module/gpu]
 type = custom/script
 exec = ~/.config/polybar/system-nvidia-smi.sh
 interval = 0.5
+format-underline = #198844
 
 [module/crypto]
 type = custom/script
 exec = ~/.config/polybar/crypto.py
-interval = 10
+interval = 30
+format-underline = #fba922
+
+[module/stocks]
+type = custom/script
+exec = ~/.config/polybar/stocks.py
+interval = 120
+format-underline = #198844
+
+[module/title]
+type = internal/xwindow
+
+[module/ethermine]
+type = custom/script
+exec = ~/Downloads/polybar-scripts/polybar-scripts/info-ethermine/ethermine.py
+interval = 60
