@@ -3,6 +3,9 @@
 # start sxhkd
 sxhkd &
 
+# colors
+bspc config focused_border_color "#FBA922"
+
 # set up monitors
 bspc monitor DP-0 -d VI:6 VII:7 VIII:8 IX:9 X:10
 bspc monitor DP-5 -d I:1 II:2 III:3 IV:4 V:5 
@@ -30,6 +33,10 @@ bspc rule -a "Slack" desktop='^7' follow=off
 bspc rule -a "Steam" desktop='^8' follow=off focus=off
 
 # autostart applications
+feh --bg-scale ~/Pictures/wallpaper_2.jpg &
+sleep 1
+compton -b --config /home/alex/.config/compton/compton.conf
+sleep 1
 termite -e neofetch --hold &
 sleep 1
 termite -e 'bash -c "~/mine"' --hold &
