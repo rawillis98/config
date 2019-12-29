@@ -74,7 +74,7 @@ module-margin-right = 2
 
 modules-left = bspwm
 modules-center = title
-modules-right = 
+modules-right = volume ethernet
 
 wm-restack = bspwm
 
@@ -108,6 +108,14 @@ wm-restack = bspwm
 
 
 
+[module/ethernet]
+type = internal/network
+interface = enp5s0
+label-connected = %downspeed:9% %local_ip%
+
+[module/volume]
+type = internal/pulseaudio
+click-right = pavucontrol &
 
 [module/bspwm]
 ws-icon-1 = I;one
@@ -176,7 +184,7 @@ format-underline = #198844
 [module/crypto]
 type = custom/script
 exec = ~/.config/polybar/crypto.py
-interval = 120
+interval = 300
 format-underline = #fba922
 
 [module/stocks]

@@ -31,6 +31,8 @@ bspc rule -a "Chromium-browser" desktop='^6' follow=on focus=on
 bspc rule -a "discord" desktop='^7' follow=off
 bspc rule -a "Slack" desktop='^7' follow=off
 bspc rule -a "Steam" desktop='^8' follow=off focus=off
+bspc rule -a "csgo_linux64" desktop='^10' follow=off focus=off
+wmname LG3D
 
 # autostart applications
 feh --bg-scale ~/Pictures/wallpaper_2.jpg &
