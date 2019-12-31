@@ -1,4 +1,4 @@
-;==========================================================
+;=========================================================
 ;
 ;
 ;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
@@ -104,9 +104,72 @@ modules-right = crypto
 
 wm-restack = bspwm
 
+[bar/laptop-top]
+bottom=false
+height = 70
+
+font-0 = fixed:size=20;1
+
+module-margin-left = 1
+module-margin-right = 2
+
+modules-left = bspwm
+modules-center = date title
+modules-right = wifi battery1 battery2
+
+radius = 25
+
+padding-left = 2
+padding-right = 2
+padding-top = 2
+padding-bottom = 2
+
+offset-x = 1%
+width = 98%
+offset-y = 1.5%
+fixed-center = true
+
+wm-restack = bspwm
+
+[bar/laptop-bottom]
+bottom=true
+height=70
+
+font-0 = fixed:size=20;1
+
+modules-left = cpu memory temperature filesystem
+modules-center = ethermine
+modules-right = stocks
+
+radius = 25
+
+module-margin-left = 1
+module-margin-right = 2
+
+padding-left = 2
+padding-right = 2
+padding-top = 2
+padding-bottom = 2
+
+offset-x = 1%
+width = 98%
+offset-y = 1.5%
+fixed-center = true
+
+wm-restack = bspwm
 
 
 
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+label-mounted = %free% free
+
+[module/wifi]
+type = internal/network
+interface = wlp1s0
+label-connected = %essid%%downspeed:9%
+label-disconnected = Not Connected
 
 [module/ethernet]
 type = internal/network
@@ -118,35 +181,17 @@ type = internal/pulseaudio
 click-right = pavucontrol &
 
 [module/bspwm]
-ws-icon-1 = I;one
-ws-icon-2 = II;two
-ws-icon-3 = III;three
-ws-icon-4 = IV;four
-ws-icon-5 = V;five
-ws-icon-6 = VI;six
-ws-icon-7 = VII;seven
-ws-icon-8 = VIII;eight
-ws-icon-9 = IX;nine
-ws-icon-0 = X;ten
-
 type = internal/bspwm
 pin-workspaces = true
 
-label-focused = %icon%
-label-focused-background = ${colors.background-alt}
-label-focused-underline = ${colors.primary}
+label-focused = ●
 label-focused-padding = 2
 
-label-occupied = %icon%
+label-occupied = ○
 label-occupied-padding = 2
 
-label-empty = %icon%
-label-empty-foreground = ${colors.foreground-alt}
+label-empty = ○
 label-empty-padding = 2
-
-label-separator = |
-label-separator-padding = 2
-label-separator-foreground = ${colors.primary}
 
 [module/cpu]
 type = internal/cpu
@@ -160,15 +205,13 @@ interval = 0.5
 label = Mem %percentage_used%%
 format-underline = #3971ed
 
-
 [module/date]
 type = internal/date
 interval = 5
 date = %Y-%m-%d
-time = %H:%M
+time = %I:%M
 label = %date% %time%
 format-underline = #a36ac7
-
 
 [module/temperature]
 type = internal/temperature
@@ -189,7 +232,7 @@ format-underline = #fba922
 
 [module/stocks]
 type = custom/script
-exec = ~/.config/polybar/stocks.py
+exec = stocks.py
 interval = 120
 format-underline = #198844
 
@@ -198,5 +241,20 @@ type = internal/xwindow
 
 [module/ethermine]
 type = custom/script
-exec = ~/Downloads/polybar-scripts/polybar-scripts/info-ethermine/ethermine.py
+exec = info-ethermine.py
+click-left = chromium-browser https://ethermine.org/miners/857fa14a9c7de4436ca08002a4284d5f38b22476/dashboard
 interval = 60
+
+[module/battery1]
+type = internal/battery
+battery = BAT1
+adapter = ADP1
+label-charging = " Bat 1: %percentage%% "
+label-discharging = " Bat 1: %percentage%% "
+
+[module/battery2]
+type = internal/battery
+battery = BAT2
+adapter = ADP1
+label-charging = " Bat 2: %percentage%% "
+label-discharging = " Bat 2: %percentage%% "

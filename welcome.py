@@ -35,13 +35,9 @@ new_ids = get_new_stories()
 id = random.sample(new_ids, 1)[0]
 item = get_item(id)
 
-print("--------------------------------------------------------------------------------")
-print("                                    Welcome!")
 print(color.BOLD + item['title'] + color.END)
 print(f"Score: {item['score']}")
 if 'url' in item:
     print(item['url'])
-print(f"https://news.ycombinator.com/item?id={id}")
-print("--------------------------------------------------------------------------------")
 
     
