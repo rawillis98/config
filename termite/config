@@ -43,7 +43,7 @@ cursor_blink = system
 [colors]
 
 # special
-background      = rgba(63, 63, 63, 0.5)
+background      = rgba(63, 63, 63, 0.9)
 foreground      = #c5c8c6
 foreground_bold = #c5c8c6
 cursor          = #FFFFFF
