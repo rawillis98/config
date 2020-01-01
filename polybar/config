@@ -31,13 +31,12 @@ monitor=DP-5
 
 font-0 = fixed:pixlesize=10;1
 line-size = 3
-height = 27
-width = 100%
-radius = 6.0
-fixed-center = false
-
-border-size = 4
-border-color = #000000
+height = 36
+width = 98%
+offset-x = 1%
+offset-y = 1%
+radius = 12
+fixed-center = true
 
 padding-left = 0
 padding-right = 2
@@ -51,20 +50,18 @@ modules-right = cpu gpu memory temperature
 
 wm-restack = bspwm
 
-
 [bar/right]
 bottom=false
 monitor=DP-0
 
 font-0 = fixed:pixlesize=10;1
 line-size = 3
-height = 27
-width = 100%
-radius = 6.0
-fixed-center = false
-
-border-size = 4
-border-color = #000000
+height = 36
+width = 98%
+offset-x = 1%
+offset-y = 1%
+radius = 12
+fixed-center = true
 
 padding-left = 0
 padding-right = 2
@@ -82,17 +79,17 @@ wm-restack = bspwm
 bottom=true
 monitor=DP-0
 
+
 font-0 = fixed:pixlesize=10;1
 line-size = 3
-height = 27
-width = 100%
-radius = 6.0
-fixed-center = false
+height = 36
+width = 98%
+offset-x = 1%
+offset-y = 1%
+radius = 12
+fixed-center = true
 
-border-size = 4
-border-color = #000000
-
-padding-left = 0
+padding-left = 2
 padding-right = 2
 
 module-margin-left = 1
