@@ -16,19 +16,14 @@
 ;
 ;==========================================================
 
-[colors]
-background = #222 
-background-alt = #444
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+
+
+include-file = ~/.config/polybar/colors.ini
+include-file = ~/.config/polybar/modules.ini
 
 [bar/left]
 bottom=false
 monitor=DP-5
-
 font-0 = fixed:pixlesize=10;1
 line-size = 3
 height = 36
@@ -37,23 +32,18 @@ offset-x = 1%
 offset-y = 1%
 radius = 12
 fixed-center = true
-
 padding-left = 0
 padding-right = 2
-
 module-margin-left = 1
 module-margin-right = 2
-
 modules-left = bspwm
 modules-center = date
 modules-right = cpu gpu memory temperature
-
 wm-restack = bspwm
 
 [bar/right]
 bottom=false
 monitor=DP-0
-
 font-0 = fixed:pixlesize=10;1
 line-size = 3
 height = 36
@@ -62,23 +52,18 @@ offset-x = 1%
 offset-y = 1%
 radius = 12
 fixed-center = true
-
 padding-left = 0
 padding-right = 2
-
 module-margin-left = 1
 module-margin-right = 2
-
 modules-left = bspwm
 modules-center = title
 modules-right = volume ethernet
-
 wm-restack = bspwm
 
 [bar/bottom]
 bottom=true
 monitor=DP-0
-
 font-0 = fixed:pixlesize=10;1
 line-size = 3
 height = 36
@@ -87,170 +72,58 @@ offset-x = 1%
 offset-y = 1%
 radius = 12
 fixed-center = true
-
 padding-left = 2
 padding-right = 2
-
 module-margin-left = 1
 module-margin-right = 2
-
 modules-left = stocks
 modules-center = ethermine
 modules-right = crypto
-
 wm-restack = bspwm
 
 [bar/laptop-top]
 bottom=false
 height = 70
-
 font-0 = fixed:size=20;1
-
+line-size = 6
 module-margin-left = 1
 module-margin-right = 2
-
 modules-left = bspwm
 modules-center = date title
-modules-right = wifi battery1 battery2
-
+modules-right = volume wifi battery1 battery2
 radius = 25
-
 padding-left = 2
 padding-right = 2
 padding-top = 2
 padding-bottom = 2
-
 offset-x = 1%
 width = 98%
 offset-y = 1.5%
 fixed-center = true
-
 wm-restack = bspwm
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 [bar/laptop-bottom]
 bottom=true
 height=70
-
+line-size = 6
 font-0 = fixed:size=20;1
-
-modules-left = cpu memory temperature filesystem
+modules-left = cpu gpu memory temperature filesystem
 modules-center = ethermine
 modules-right = stocks
-
 radius = 25
-
 module-margin-left = 1
 module-margin-right = 2
-
 padding-left = 2
 padding-right = 2
 padding-top = 2
 padding-bottom = 2
-
 offset-x = 1%
 width = 98%
 offset-y = 1.5%
 fixed-center = true
-
 wm-restack = bspwm
 
 
 
-[module/filesystem]
-type = internal/fs
-mount-0 = /
-label-mounted = %free% free
-
-[module/wifi]
-type = internal/network
-interface = wlp1s0
-label-connected = %essid%%downspeed:9%
-label-disconnected = Not Connected
-
-[module/ethernet]
-type = internal/network
-interface = enp5s0
-label-connected = %downspeed:9% %local_ip%
-
-[module/volume]
-type = internal/pulseaudio
-click-right = pavucontrol &
-
-[module/bspwm]
-type = internal/bspwm
-pin-workspaces = true
-
-label-focused = ●
-label-focused-padding = 2
-
-label-occupied = ○
-label-occupied-padding = 2
-
-label-empty = ○
-label-empty-padding = 2
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-label = CPU %percentage%%
-format-underline = #cc342b
-
-[module/memory]
-type = internal/memory
-interval = 0.5
-label = Mem %percentage_used%%
-format-underline = #3971ed
-
-[module/date]
-type = internal/date
-interval = 5
-date = %Y-%m-%d
-time = %I:%M
-label = %date% %time%
-format-underline = #a36ac7
-
-[module/temperature]
-type = internal/temperature
-label = %temperature-c%
-format-underline = #ff0000
-
-[module/gpu]
-type = custom/script
-exec = ~/.config/polybar/system-nvidia-smi.sh
-interval = 0.5
-format-underline = #198844
-
-[module/crypto]
-type = custom/script
-exec = ~/.config/polybar/crypto.py
-interval = 600
-format-underline = #fba922
-
-[module/stocks]
-type = custom/script
-exec = stocks.py
-interval = 600
-format-underline = #198844
-
-[module/title]
-type = internal/xwindow
-
-[module/ethermine]
-type = custom/script
-exec = info-ethermine.py
-click-left = chromium-browser https://ethermine.org/miners/857fa14a9c7de4436ca08002a4284d5f38b22476/dashboard
-interval = 60
-
-[module/battery1]
-type = internal/battery
-battery = BAT1
-adapter = ADP1
-label-charging = " Bat 1: %percentage%% "
-label-discharging = " Bat 1: %percentage%% "
-
-[module/battery2]
-type = internal/battery
-battery = BAT2
-adapter = ADP1
-label-charging = " Bat 2: %percentage%% "
-label-discharging = " Bat 2: %percentage%% "

@@ -16,7 +16,7 @@ super + Escape
 
 # run rofi
 F2
-	rofi -show run
+	rofi -font "hack 20" -show run
 
 # mute
 XF86AudioMute
