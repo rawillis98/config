@@ -1,0 +1,7 @@
+Host tacc
+	User rwillis
+	HostName maverick2.tacc.utexas.edu
+
+Host pi
+	User pi
+	HostName 192.168.86.37
