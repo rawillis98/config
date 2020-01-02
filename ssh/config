@@ -5,3 +5,7 @@ Host tacc
 Host pi
 	User pi
 	HostName 192.168.86.37
+
+Host desktop
+	User alex
+	HostName rawillis.com
