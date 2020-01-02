@@ -223,13 +223,13 @@ format-underline = #198844
 [module/crypto]
 type = custom/script
 exec = ~/.config/polybar/crypto.py
-interval = 300
+interval = 600
 format-underline = #fba922
 
 [module/stocks]
 type = custom/script
 exec = stocks.py
-interval = 120
+interval = 600
 format-underline = #198844
 
 [module/title]
