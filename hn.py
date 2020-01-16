@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import requests
+from func_timeout import func_set_timeout
 import random
 
 
@@ -29,14 +30,21 @@ def get_new_stories():
     ids = requests.get(url).json()
     return ids
 
+@func_set_timeout(2)
+def print_random_new_story():
+    new_ids = get_new_stories()
+    id = random.sample(new_ids, 1)[0]
+    item = get_item(id)
 
-new_ids = get_new_stories()
-id = random.sample(new_ids, 1)[0]
-item = get_item(id)
+    print(color.BOLD + item['title'] + color.END)
+    print(f"Score: {item['score']}")
+    if 'url' in item:
+        print(item['url'])
 
-print(color.BOLD + item['title'] + color.END)
-print(f"Score: {item['score']}")
-if 'url' in item:
-    print(item['url'])
+try:
+    print_random_new_story()
+except Exception as e:
+    print("Couldn't connect to hacker news.")
+
 
     
