@@ -109,7 +109,7 @@ bottom=true
 height=70
 line-size = 6
 font-0 = fixed:size=20;1
-modules-left = cpu gpu memory temperature filesystem
+modules-left = cpu memory temperature filesystem
 modules-center = ethermine
 modules-right = stocks
 radius = 25
