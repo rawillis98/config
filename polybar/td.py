@@ -17,33 +17,31 @@ class MyHandler(BaseHTTPRequestHandler):
         TDAPI.set_code(code)
         return
 
+def encode(s):
+    return urllib.parse.quote(s)
+def unencode(s):
+    return urllib.parse.unquote(s)
+
+
 class TDAPI:
     code = ""
 
     def __init__(self):
-        need_new_token = False 
-        if need_new_token:
-            print("getting auth url")
-            self.port = 4443
-            self.get_auth_url()
-            
-            httpd = HTTPServer(('localhost', self.port), MyHandler)
-            httpd.socket = ssl.wrap_socket(httpd.socket, server_side=True, certfile='yourpemfile.pem')
-            print(f"Listening on {self.port}")
-            while TDAPI.code == "":
-                httpd.handle_request()
+        print("getting auth url")
+        self.port = 4443
+        self.get_auth_url()
+        
+        httpd = HTTPServer(('localhost', self.port), MyHandler)
+        httpd.socket = ssl.wrap_socket(httpd.socket, server_side=True, certfile='yourpemfile.pem')
+        print(f"Listening on {self.port}")
+        while TDAPI.code == "":
+            httpd.handle_request()
 
-            print()
-            print("The code is")
-            print(TDAPI.code)
+        assert TDAPI.code is not ""
 
-            assert TDAPI.code is not ""
+        self.get_access_token(TDAPI.code).json()['access_token']
 
-            self.get_access_token(TDAPI.code)
-
-        self.access_token = read_key('td.code')
-        print(self.access_token)
-
+        print(self.get_account(self.access_token))
     
 
     def get_auth_url(self):
@@ -81,9 +79,22 @@ class TDAPI:
         }
 
         request = requests.post(endpoint, data=parameters, headers=headers)
-        self.save_code(request.json()['access_token'])
+        self.access_token = request.json()['access_token']
+        self.refresh_token = request.json()['refresh_token']
         return request
 
+    def get_account(self, access_token):
+        endpoint = r'https://api.tdameritrade.com/v1/accounts'
+        parameters = {
+                'fields': 'positions,orders'
+        }
+
+        headers = {
+                'Authorization': f'Bearer {access_token}'
+        }
+
+        request = requests.get(endpoint, data=parameters, headers=headers)
+        return request.json()
     
 if __name__ == '__main__':
     td = TDAPI()
