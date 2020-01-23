@@ -83,6 +83,7 @@ wm-restack = bspwm
 
 [bar/laptop-top]
 bottom=false
+monitor=eDP-1
 height = 70
 font-0 = fixed:size=20;1
 line-size = 6
@@ -99,19 +100,20 @@ padding-bottom = 2
 offset-x = 1%
 width = 98%
 offset-y = 1.5%
-fixed-center = true
+fixed-center = false
 wm-restack = bspwm
 background = ${colors.background}
 foreground = ${colors.foreground}
 
 [bar/laptop-bottom]
 bottom=true
+monitor=eDP-1
 height=70
 line-size = 6
 font-0 = fixed:size=20;1
 modules-left = cpu memory temperature filesystem
 modules-center = ethermine
-modules-right = stocks
+modules-right = td_positions td_equity 
 radius = 25
 module-margin-left = 1
 module-margin-right = 2
@@ -125,5 +127,25 @@ offset-y = 1.5%
 fixed-center = true
 wm-restack = bspwm
 
-
+[bar/laptop-extra]
+bottom=false
+monitor=DP-1
+height=70
+line-size = 6
+font-0 = fixed:size=20;1
+modules-left = bspwm
+modules-center =
+modules-right = 
+radius = 25
+module-margin-left = 1
+module-margin-right = 2
+padding-left = 2
+padding-right = 2
+padding-top = 2
+padding-bottom = 2
+offset-x = 1%
+width = 98%
+offset-y = 1.5%
+fixed-center = true
+wm-restack = bspwm
 

@@ -21,7 +21,7 @@ class MyHandler(BaseHTTPRequestHandler):
 
 class TDAPI:
     code = ""
-    refresh_token_file_name = 'td.refresh'
+    refresh_token_file_name = '/home/alex/Documents/keys/td.refresh'
 
     def __init__(self):
         # do we have a refresh token?
@@ -40,14 +40,6 @@ class TDAPI:
             assert TDAPI.code is not ""
 
             self.get_access_token_from_scratch(TDAPI.code).json()['access_token']
-
-    def run(self):
-        accounts = self.get_accounts('positions,orders')
-        for account in accounts:
-            account = account['securitiesAccount']
-            for key, value in account.items():
-                print(key, value)
-                
 
     def get_auth_url(self):
         redirect_uri = r'https://localhost:' + str(self.port)
@@ -106,7 +98,7 @@ class TDAPI:
         return request.json()
         
 
-    def get_accounts(self, fields):
+    def get_accounts(self, fields='positions,orders'):
         endpoint = r'https://api.tdameritrade.com/v1/accounts'
         parameters = {
                 'fields': fields
@@ -116,9 +108,14 @@ class TDAPI:
                 'Authorization': f'Bearer {self.access_token}'
         }
 
-        request = requests.get(endpoint, data=parameters, headers=headers)
+        request = requests.get(endpoint, params=parameters, headers=headers)
         return request.json()
     
 if __name__ == '__main__':
     td = TDAPI()
-    td.run()
+    a = td.get_accounts()
+    a = a[0]
+    a = a['securitiesAccount']
+    a = a['positions']
+    for position in a:
+        print(position['instrument'])

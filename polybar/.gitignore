@@ -1,1 +1,2 @@
 *.refresh
+__pycache__/*
