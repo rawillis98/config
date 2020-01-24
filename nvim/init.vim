@@ -11,6 +11,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'ericbn/vim-relativize'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
+Plug 'nvie/vim-flake8'
 
 call plug#end()
 
