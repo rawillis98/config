@@ -1,6 +1,3 @@
-nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
-nnoremap <F10> :exec '!python -m pytest'<cr>
-
 set shiftwidth=0 tabstop=4
 
 call plug#begin('~/.local/share/nvim/plugged')
@@ -19,8 +16,11 @@ set number relativenumber
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-map <C-n> :NERDTreeToggle<CR>
-map <F8> :TagbarToggle<CR>
 
+map <C-n> :NERDTreeToggle<CR>
+imap <C-l> <Esc>
+map <F8> :TagbarToggle<CR>
+nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+nnoremap <F10> :exec '!python -m pytest'<cr>
 
 
