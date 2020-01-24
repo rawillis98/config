@@ -15,5 +15,5 @@ if len(positions) > 0:
         qty = position['longQuantity']
         marketValue = position['marketValue'] / qty
         out += f"{symbol}x{int(qty)}@{marketValue}" + ", "
-    out = out [:-2]
+    out = out[:-2]
 print(out)
