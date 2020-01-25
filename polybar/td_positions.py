@@ -14,6 +14,6 @@ if len(positions) > 0:
         symbol = instrument['symbol']
         qty = position['longQuantity']
         marketValue = position['marketValue'] / qty
-        out += f"{symbol}x{int(qty)}@{marketValue}" + ", "
+        out += f"{symbol}={round(position['currentDayProfitLossPercentage'] * 100)}%" + ", "
     out = out[:-2]
 print(out)

@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import os
+import subprocess
 import requests
 import urllib.parse
 from read_key import *
@@ -9,6 +10,7 @@ import ssl
 
 
 class MyHandler(BaseHTTPRequestHandler):
+    my_response = "You can close this page now."
 
     def do_GET(self):
         query = urllib.parse.urlsplit(self.path).query
@@ -16,14 +18,33 @@ class MyHandler(BaseHTTPRequestHandler):
         code = query_dict['code'][0]
         code = urllib.parse.unquote(code)
         TDAPI.set_code(code)
-        return
+
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(MyHandler.my_response.encode("utf-8"))
+
+    def do_POST(self):
+        self.do_GET()
 
 
 class TDAPI:
     code = ""
-    refresh_token_file_name = '/home/alex/Documents/keys/td.refresh'
+    refresh_token_file_name = './td.refresh'
+    pem_file = './server.pem'
+
+    def generate_pem(self):
+        print("Generating pem")
+        command = "openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes" 
+        process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+        output, error = process.communicate()
+        print("Done generating pem")
 
     def __init__(self):
+        # do we have a pem file?
+        if not os.path.exists(TDAPI.pem_file):
+            self.generate_pem()
+
         # do we have a refresh token?
         if os.path.exists(TDAPI.refresh_token_file_name):
             self.refresh_token = read_key(TDAPI.refresh_token_file_name)
@@ -33,7 +54,7 @@ class TDAPI:
             self.get_auth_url()
             
             httpd = HTTPServer(('localhost', self.port), MyHandler)
-            httpd.socket = ssl.wrap_socket(httpd.socket, server_side=True, certfile='yourpemfile.pem')
+            httpd.socket = ssl.wrap_socket(httpd.socket, server_side=True, certfile=self.pem_file)
             while TDAPI.code == "":
                 httpd.handle_request()
 
