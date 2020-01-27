@@ -1,5 +1,3 @@
-set shiftwidth=0 tabstop=4
-
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'vim-airline/vim-airline'
@@ -13,6 +11,8 @@ Plug 'nvie/vim-flake8'
 call plug#end()
 
 set number relativenumber
+set shiftwidth=0 tabstop=4
+set colorcolumn=80
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
