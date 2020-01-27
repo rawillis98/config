@@ -30,12 +30,12 @@ class MyHandler(BaseHTTPRequestHandler):
 
 class TDAPI:
     code = ""
-    refresh_token_file_name = './td.refresh'
-    pem_file = './server.pem'
+    refresh_token_file_name = '/home/alex/Documents/keys/td.refresh'
+    pem_file = '/home/alex/Documents/keys/server.pem'
 
     def generate_pem(self):
         print("Generating pem")
-        command = "openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes" 
+        command = f"openssl req -new -x509 -keyout {TDAPI.pem_file} -out {TDAPI.pem_file} -days 365 -nodes" 
         process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
         print("Done generating pem")
