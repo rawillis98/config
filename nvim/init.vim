@@ -1,7 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'vim-airline/vim-airline'
-Plug 'davidhalter/jedi-vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ericbn/vim-relativize'
 Plug 'scrooloose/nerdtree'
@@ -14,7 +13,7 @@ Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 set number relativenumber
-set shiftwidth=0 tabstop=4
+set shiftwidth=0 tabstop=4 expandtab
 set colorcolumn=80
 
 autocmd StdinReadPre * let s:std_in=1
