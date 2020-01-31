@@ -16,6 +16,7 @@ call plug#end()
 set number relativenumber
 set shiftwidth=0 tabstop=4 expandtab
 set colorcolumn=80
+let g:rainbow_active = 1
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
